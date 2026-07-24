@@ -34,5 +34,4 @@ Route::middleware(['auth', 'admin'])
     });
 
 // Route::post('/hotel/search', [HotelSearchController::class, 'init'])
-
 require __DIR__.'/auth.php';
