@@ -16,7 +16,7 @@ class DatabaseController extends Controller
         $query = DB::table('bookings')
             ->join('users', 'bookings.user_id', '=', 'users.id')
             ->select('bookings.*', 'users.email as user_email');
-
+            
         // SELECT bookings.*, users.email
         // FROM bookings
         // JOIN users ON bookings.user_id = users.id;
