@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
 use App\Services\MozioService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -132,7 +133,6 @@ class BookingsController extends Controller
         $response = $mozioService->cancelReservation($booking->reservation_id);
 
         if (! $response['success']) {
-
             return redirect()->back()->with(
                 'error',
                 $response['message'] ?? 'Unable to cancel booking.'

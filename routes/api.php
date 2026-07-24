@@ -1,16 +1,16 @@
 <?php
 
+use App\Http\Controllers\Admin\DatabaseController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\Hotel\HotelContentController;
 use App\Http\Controllers\Api\Hotel\HotelLocationController;
 use App\Http\Controllers\Api\Hotel\HotelRoomController;
 use App\Http\Controllers\Api\Hotel\HotelSearchController;
+use App\Http\Controllers\Api\Hotel\HotelSearchHotelsController;
 use App\Http\Controllers\Api\Mozio\AmenitiesController;
 use App\Http\Controllers\Api\Mozio\GetSessionClockController;
 use App\Http\Controllers\Api\Mozio\ReservationController;
 use App\Http\Controllers\Api\Mozio\SearchAndFilterController;
-use App\Http\Controllers\Api\Hotel\HotelSearchHotelsController;
-
 use App\Services\MozioService;
 use Illuminate\Support\Facades\Route;
 
@@ -93,34 +93,4 @@ Route::prefix('hotel')->group(function () {
     Route::get('/{hotelId}/{token}/price/{recommendationId}', [HotelRoomController::class, 'priceByRecommendation']);
 });
 
-// ── Hotel Nexus ──────────────────────────────────────────────────────────────
-// Route::prefix('hotel')->group(function () {
-
-//     // ── Locations ─────────────────────────────────────────────────────────────
-//     Route::get('/locations', [HotelLocationController::class, 'search']);
-//     Route::get('/locations/{locationId}/details', [HotelLocationController::class, 'details']);
-
-//     // ── Content ───────────────────────────────────────────────────────────────
-//     Route::post('/content', [HotelContentController::class, 'getContent']);
-//     Route::get('/content/facilities', [HotelContentController::class, 'getFacilityGroups']);
-//     Route::post('/{hotelId}/reviews', [HotelContentController::class, 'guestReviews']);
-
-//     // ── Availability ──────────────────────────────────────────────────────────
-//     Route::post('/search/init', [HotelSearchController::class, 'init']);
-//     Route::get('/search/{token}/results', [HotelSearchController::class, 'results']);
-//     Route::get('/search/{token}/poll', [HotelSearchController::class, 'poll']);
-//     Route::post('/search/{token}/enrich', [HotelSearchController::class, 'enrich']);
-//     Route::post('/search/{token}/filter', [HotelSearchController::class, 'filter']);
-
-//     // ── Rooms ─────────────────────────────────────────────────────────────────
-//     Route::post('/{hotelId}/rooms/{token}', [HotelRoomController::class, 'roomsAndRates']);
-//     Route::get('/{hotelId}/{token}/price/{recommendationId}', [HotelRoomController::class, 'priceByRecommendation']);
-
-//     // ── Booking ───────────────────────────────────────────────────────────────
-//     Route::post('/{hotelId}/{token}/book', [HotelBookingController::class, 'book']);
-//     Route::post('/{hotelId}/{token}/booksecure', [HotelBookingController::class, 'bookSecure']);
-//     Route::post('/booking/details', [HotelBookingController::class, 'bookingDetails']);
-//     Route::get('/booking/cancellation-fee', [HotelBookingController::class, 'cancellationFee']);
-//     Route::post('/booking/{bookingId}/cancel', [HotelBookingController::class, 'cancel']);
-
-// });
+Route::get('/mozio/database', [DatabaseController::class, 'index']);
