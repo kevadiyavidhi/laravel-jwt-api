@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api\Hotel;
 
 use App\Helpers\HotelFilterHelper;
+use App\Http\Requests\SearchHotelsRequest;
 use App\Logging\ApiLogger;
 use App\Models\HotelSearch;
 use App\Services\HotelNexusService;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
@@ -36,27 +36,8 @@ class HotelSearchHotelsController extends BaseController
      *
      * Returns single merged response like reference API
      */
-    public function search(Request $request)
+    public function search(SearchHotelsRequest $request)
     {
-        $request->validate([
-            'name' => ['required', 'string'],
-            'geoLat' => ['required', 'numeric'],
-            'geoLong' => ['required', 'numeric'],
-            'locationId' => ['nullable', 'string'],
-            'locationType' => ['nullable', 'string'],
-            'code' => ['nullable', 'string'],
-            'radius' => ['nullable', 'numeric'],
-            'checkinDate' => ['required', 'string'],
-            'checkoutDate' => ['required', 'string'],
-            'desiredResultCurrency' => ['nullable', 'string'],
-            'residency' => ['nullable', 'string'],
-            'rooms' => ['required', 'array', 'min:1'],
-            'rooms.*.adults' => ['required', 'integer', 'min:1'],
-            'rooms.*.childs' => ['nullable', 'array'],
-            'page' => ['nullable', 'integer', 'min:1'],
-            'perPage' => ['nullable', 'integer', 'min:1', 'max:100'],
-        ]);
-
         $user = auth('api')->user();
         $customerIp = $request->ip();
         $searchId = (string) Str::uuid();
