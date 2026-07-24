@@ -62,7 +62,7 @@ class HotelSearchHotelsController extends BaseController
         $searchId = (string) Str::uuid();
         $searchDate = now()->format('Y-m-d');
         $page = (int) $request->input('page', 1);
-        $perPage = (int) $request->input('perPage', 25);
+        $perPage = (int) $request->input('perPage', 20);
         $currency = $request->input('desiredResultCurrency', 'USD');
         $radius = (float) $request->input('radius', 5);
 
